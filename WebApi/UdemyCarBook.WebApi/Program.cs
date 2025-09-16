@@ -55,6 +55,7 @@ builder.Services.AddScoped<GetContactByIdQueryHandler>();
 builder.Services.AddScoped<CreateContactCommandHandler>();
 builder.Services.AddScoped<UpdateContactCommandHandler>();
 builder.Services.AddScoped<RemoveContactCommandHandler>();
+builder.Services.AddScoped<RemoveContactCommandHandler>();
 
 
 //builder.Services.AddScoped<GetLast5CarsWithBrandQueryHandler>();
