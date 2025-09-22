@@ -17,9 +17,9 @@ namespace UdemyCarBook.WebApi.Controllers
         private readonly UpdateCarCommandHandler _updateCarCommandHandler;
         private readonly RemoveCarCommandHandler _removeCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
-        //private readonly GetLast5CarsWithBrandQueryHandler _getLast5CarsWithBrandQueryHandler;
+        private readonly GetLast5CarsWithBrandQueryHandler _getLast5CarsWithBrandQueryHandler;
 
-        public CarsController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler/*, GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler*/)
+        public CarsController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -27,7 +27,7 @@ namespace UdemyCarBook.WebApi.Controllers
             _updateCarCommandHandler = updateCarCommandHandler;
             _removeCarCommandHandler = removeCarCommandHandler;
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
-            //_getLast5CarsWithBrandQueryHandler = getLast5CarsWithBrandQueryHandler;
+           _getLast5CarsWithBrandQueryHandler = getLast5CarsWithBrandQueryHandler;
         }
 
         [HttpGet]
@@ -71,12 +71,12 @@ namespace UdemyCarBook.WebApi.Controllers
             return Ok(values);
         }
 
-        //[HttpGet("GetLast5CarsWithBrandQueryHandler")]
-        //public IActionResult GetLast5CarsWithBrandQueryHandler()
-        //{
-        //    var values = _getLast5CarsWithBrandQueryHandler.Handle();
-        //    return Ok(values);
-        //}
+        [HttpGet("GetLast5CarsWithBrandQueryHandler")]
+        public IActionResult GetLast5CarsWithBrandQueryHandler()
+        {
+            var values = _getLast5CarsWithBrandQueryHandler.Handle();
+            return Ok(values);
+        }
 
 
 

@@ -4,16 +4,43 @@ using UdemyCarBook.Application.Features.CQRS.Handlers.BrandHandlers;
 using UdemyCarBook.Application.Features.CQRS.Handlers.CarHandlers;
 using UdemyCarBook.Application.Features.CQRS.Handlers.CategoryHandlers;
 using UdemyCarBook.Application.Features.CQRS.Handlers.ContactHandlers;
+using UdemyCarBook.Application.Features.RepositoryPattern;
 using UdemyCarBook.Application.Interfaces;
+using UdemyCarBook.Application.Interfaces.BlogInterfaces;
+using UdemyCarBook.Application.Interfaces.CarDescriptionInterfaces;
+using UdemyCarBook.Application.Interfaces.CarFeatureInterfaces;
 using UdemyCarBook.Application.Interfaces.CarInterfaces;
+using UdemyCarBook.Application.Interfaces.CarPricingInterfaces;
+using UdemyCarBook.Application.Interfaces.TagCloudInterfaces;
+using UdemyCarBook.Application.Services;
 using UdemyCarBook.Persistence.Context;
 using UdemyCarBook.Persistence.Repositories;
+using UdemyCarBook.Persistence.Repositories.BlogRepositories;
+using UdemyCarBook.Persistence.Repositories.CarDescriptionRepositories;
+using UdemyCarBook.Persistence.Repositories.CarFeatureRepositories;
+using UdemyCarBook.Persistence.Repositories.CarPricingRepositories;
 using UdemyCarBook.Persistence.Repositories.CarRepositories;
+using UdemyCarBook.Persistence.Repositories.CommentRepositories;
+using UdemyCarBook.Persistence.Repositories.TagCloudRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpClient();
+
 
 // Add services to the container.
 builder.Services.AddScoped<CarBookContext>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
+//builder.Services.AddScoped(typeof(IStatisticsRepository), typeof(StatisticsRepository));
+builder.Services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
+builder.Services.AddScoped(typeof(ICarPricingRepository), typeof(CarPricingRepository));
+builder.Services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepository));
+//builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
+builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
+builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
+//builder.Services.AddScoped(typeof(IReviewRepository), typeof(ReviewRepository));
+
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
@@ -43,6 +70,8 @@ builder.Services.AddScoped<CreateCarCommandHandler>();
 builder.Services.AddScoped<UpdateCarCommandHandler>();
 builder.Services.AddScoped<RemoveCarCommandHandler>();
 builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
+builder.Services.AddScoped<GetLast5CarsWithBrandQueryHandler>();
+
 
 builder.Services.AddScoped<GetCategoryQueryHandler>();
 builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
@@ -57,8 +86,7 @@ builder.Services.AddScoped<UpdateContactCommandHandler>();
 builder.Services.AddScoped<RemoveContactCommandHandler>();
 builder.Services.AddScoped<RemoveContactCommandHandler>();
 
-
-//builder.Services.AddScoped<GetLast5CarsWithBrandQueryHandler>();
+builder.Services.AddApplicationService(builder.Configuration);  
 
 
 

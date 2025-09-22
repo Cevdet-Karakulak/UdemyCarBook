@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using UdemyCarBook.Application.Features.CQRS.Commands.ContactCommands;
-using UdemyCarBook.Application.Features.CQRS.Handlers.ContactHandlers;
-using UdemyCarBook.Application.Features.CQRS.Queries.ContactQueries;
+using UdemyCarBook.Application.Features.Mediator.Commands.CommentCommands;
+using UdemyCarBook.Application.Features.Mediator.Commands.ReservationCommands;
+using UdemyCarBook.Application.Features.RepositoryPattern;
+using UdemyCarBook.Domain.Entities;
 
 namespace UdemyCarBook.WebApi.Controllers
 {
@@ -10,54 +12,69 @@ namespace UdemyCarBook.WebApi.Controllers
     [ApiController]
     public class CommentsController : ControllerBase
     {
-        private readonly CreateContactCommandHandler _createContactCommandHandler;
-        private readonly GetContactByIdQueryHandler _getContactByIdQueryHandler;
-        private readonly GetContactQueryHandler _getContactQueryHandler;
-        private readonly UpdateContactCommandHandler _updateContactCommandHandler;
-        private readonly RemoveContactCommandHandler _removeContactCommandHandler;
-
-        public CommentsController(CreateContactCommandHandler createContactCommandHandler, GetContactByIdQueryHandler getContactByIdQueryHandler, GetContactQueryHandler getContactQueryHandler, UpdateContactCommandHandler updateContactCommandHandler, RemoveContactCommandHandler removeContactCommandHandler)
+        private readonly IGenericRepository<Comment> _commentsRepository;
+        private readonly IMediator _mediator;
+        public CommentsController(IGenericRepository<Comment> commentsRepository, IMediator mediator)
         {
-            _createContactCommandHandler = createContactCommandHandler;
-            _getContactByIdQueryHandler = getContactByIdQueryHandler;
-            _getContactQueryHandler = getContactQueryHandler;
-            _updateContactCommandHandler = updateContactCommandHandler;
-            _removeContactCommandHandler = removeContactCommandHandler;
+            _commentsRepository = commentsRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ContactList()
+        public IActionResult CommentList()
         {
-            var values = await _getContactQueryHandler.Handle();
+            var values = _commentsRepository.GetAll();
             return Ok(values);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetContact(int id)
-        {
-            var value = await _getContactByIdQueryHandler.Handle(new GetContactByIdQuery(id));
-            return Ok(value);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> CreateContact(CreateContactCommand command)
-        {
-            await _createContactCommandHandler.Handle(command);
-            return Ok("Kategori Bilgisi Eklendi");
+        public IActionResult CreateComment(Comment comment)
+        {           
+            _commentsRepository.Create(comment);
+            return Ok("Yorum başarıyla eklendi");
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveContact(int id)
+        public IActionResult RemoveComment(int id)
         {
-            await _removeContactCommandHandler.Handle(new RemoveContactCommand(id));
-            return Ok("Kategori Bilgisi Silindi");
+            var value = _commentsRepository.GetById(id);
+            _commentsRepository.Remove(value);
+            return Ok("Yorum başarıyla silindi");
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateContact(UpdateContactCommand command)
+        public IActionResult UpdateComment(Comment comment)
         {
-            await _updateContactCommandHandler.Handle(command);
-            return Ok("Kategori Bilgisi Güncellendi");
+            _commentsRepository.Update(comment);
+            return Ok("Yorum başarıyla silindi");
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetComment(int id)
+        {
+            var value = _commentsRepository.GetById(id);
+            return Ok(value);
+        }
+
+        [HttpGet("CommentListByBlog")]
+        public IActionResult CommentListByBlog(int id)
+        {
+            var value = _commentsRepository.GetCommentsByBlogId(id);
+            return Ok(value);
+        }
+
+        [HttpGet("CommentCountByBlog")]
+        public IActionResult CommentCountByBlog(int id)
+        {
+            var value=_commentsRepository.GetCountCommentByBlog(id);
+            return Ok(value);
+        }
+
+        [HttpPost("CreateCommentWithMediator")]
+        public async Task<IActionResult> CreateCommentWithMediator(CreateCommentCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok("Yorum başarıyla eklendi");
         }
     }
 }

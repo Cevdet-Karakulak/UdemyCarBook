@@ -47,6 +47,31 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Author", b =>
+                {
+                    b.Property<int>("AuthorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuthorID"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AuthorID");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Banner", b =>
                 {
                     b.Property<int>("BannerID")
@@ -74,6 +99,44 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.HasKey("BannerID");
 
                     b.ToTable("Banners");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Blog", b =>
+                {
+                    b.Property<int>("BlogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogID"));
+
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BlogID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Brand", b =>
@@ -231,6 +294,39 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("CommentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentID"));
+
+                    b.Property<int>("BlogID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CommentID");
+
+                    b.HasIndex("BlogID");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Contact", b =>
                 {
                     b.Property<int>("ContactID")
@@ -343,6 +439,63 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.ToTable("Pricings");
                 });
 
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Reservation", b =>
+                {
+                    b.Property<int>("ReservationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationID"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DriverLicenseYear")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DropOffLocationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PickUpLocationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReservationID");
+
+                    b.HasIndex("CarID");
+
+                    b.HasIndex("DropOffLocationID");
+
+                    b.HasIndex("PickUpLocationID");
+
+                    b.ToTable("Reservations");
+                });
+
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Service", b =>
                 {
                     b.Property<int>("ServiceID")
@@ -393,6 +546,28 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.ToTable("SocialMedias");
                 });
 
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.TagCloud", b =>
+                {
+                    b.Property<int>("TagCloudID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagCloudID"));
+
+                    b.Property<int>("BlogID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TagCloudID");
+
+                    b.HasIndex("BlogID");
+
+                    b.ToTable("TagClouds");
+                });
+
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Testimonial", b =>
                 {
                     b.Property<int>("TestimonialID")
@@ -420,6 +595,25 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.HasKey("TestimonialID");
 
                     b.ToTable("Testimonials");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Blog", b =>
+                {
+                    b.HasOne("UdemyCarBook.Domain.Entities.Author", "Author")
+                        .WithMany("Blogs")
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UdemyCarBook.Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Car", b =>
@@ -480,6 +674,63 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("Pricing");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("UdemyCarBook.Domain.Entities.Blog", "Blog")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Reservation", b =>
+                {
+                    b.HasOne("UdemyCarBook.Domain.Entities.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UdemyCarBook.Domain.Entities.Location", "DropOffLocation")
+                        .WithMany()
+                        .HasForeignKey("DropOffLocationID");
+
+                    b.HasOne("UdemyCarBook.Domain.Entities.Location", "PickUpLocation")
+                        .WithMany()
+                        .HasForeignKey("PickUpLocationID");
+
+                    b.Navigation("Car");
+
+                    b.Navigation("DropOffLocation");
+
+                    b.Navigation("PickUpLocation");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.TagCloud", b =>
+                {
+                    b.HasOne("UdemyCarBook.Domain.Entities.Blog", "Blog")
+                        .WithMany("TagClouds")
+                        .HasForeignKey("BlogID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Author", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Blog", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("TagClouds");
                 });
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Brand", b =>
