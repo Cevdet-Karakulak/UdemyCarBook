@@ -10,7 +10,7 @@ namespace UdemyCarBook.Application.Features.CQRS.Results.CategoryResults
     {
         public int CategoryID { get; set; }
         public string Name { get; set; }
-        public int BlogCount { get; set; }  // ✅ kategoriye ait makale sayısı
+        //public int BlogCount { get; set; }  // ✅ kategoriye ait makale sayısı
 
     }
 }

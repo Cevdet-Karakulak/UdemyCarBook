@@ -23,7 +23,7 @@ namespace UdemyCarBook.Application.Features.CQRS.Handlers.CategoryHandlers
             return values.Select(x => new GetCategoryQueryResult
             {
                 Name = x.Name,
-                CategoryID = x.CategoryID
+                CategoryID = x.CategoryID,
             }).ToList();
         }
     }

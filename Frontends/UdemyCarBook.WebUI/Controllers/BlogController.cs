@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Text;
 using UdemyCarBook.Dto.BlogDtos;
 using UdemyCarBook.Dto.CommentDtos;
-using UdemyCarBook.Dto.LocationDtos;
 
 namespace UdemyCarBook.WebUI.Controllers
 {
@@ -14,20 +13,33 @@ namespace UdemyCarBook.WebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
+
         public async Task<IActionResult> Index()
         {
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Yazarlarımızın Blogları";
             var client = _httpClientFactory.CreateClient();
+
             var responseMessage = await client.GetAsync("https://localhost:7124/api/Blogs/GetAllBlogsWithAuthorList");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultAllBlogsWithAuthorDto>>(jsonData);
+
+                // Blog başına comment sayısı ekleme
+                foreach (var blog in values)
+                {
+                    var commentResponse = await client.GetAsync($"https://localhost:7124/api/Comments/CommentCountByBlog?id=" + blog.blogID);
+                    var commentCountStr = await commentResponse.Content.ReadAsStringAsync();
+                    blog.CommentCount = int.TryParse(commentCountStr, out var count) ? count : 0;
+                }
+
                 return View(values);
             }
+
             return View();
         }
+
         public async Task<IActionResult> BlogDetail(int id)
         {
             ViewBag.v1 = "Bloglar";
@@ -38,6 +50,7 @@ namespace UdemyCarBook.WebUI.Controllers
             var responseMessage2 = await client.GetAsync($"https://localhost:7124/api/Comments/CommentCountByBlog?id=" + id);
             var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
             ViewBag.commentCount = jsonData2;
+
             return View();
         }
 
