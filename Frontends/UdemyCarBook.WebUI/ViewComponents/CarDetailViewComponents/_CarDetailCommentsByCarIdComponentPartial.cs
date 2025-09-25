@@ -22,9 +22,25 @@ namespace UdemyCarBook.WebUI.ViewComponents.CarDetailViewComponents
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultReviewByCarIdDto>>(jsonData);
+
+                // Toplam review sayısı
+                ViewBag.TotalReviews = values.Count;
+
+                // Rating grupları
+                ViewBag.ReviewStats = values
+                    .GroupBy(x => x.RaytingValue)
+                    .Select(g => new
+                    {
+                        Stars = g.Key,
+                        Count = g.Count(),
+                        Percent = (int)Math.Round((double)g.Count() / values.Count * 100)
+                    })
+                    .OrderByDescending(x => x.Stars)
+                    .ToList();
+
                 return View(values);
             }
-            return View();
+            return View(new List<ResultReviewByCarIdDto>());
         }
     }
 }

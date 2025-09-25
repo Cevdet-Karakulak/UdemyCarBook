@@ -7,8 +7,8 @@
             <h4 class="card-title mb-3">Lokasyon Verileri</h4>
 
             <!-- Grafik Container -->
-            <div style="height:260px; width:100%; display:flex; justify-content:center; align-items:center;">
-                <canvas id="my3Chart" style="width:100%; max-width:400px; height:260px;"></canvas>
+            <div style="height:300px; width:100%; display:flex; justify-content:center; align-items:center;">
+                <canvas id="my3Chart" style="max-width:500px; height:100%;"></canvas>
             </div>
 
             <script src="/chart.js"></script>
@@ -46,12 +46,13 @@
                                 borderWidth: 1
                             }]
                         },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: { position: 'bottom' }
-                            }
-                        }
+                                        options: {
+                    responsive: true,
+                    maintainAspectRatio: false,   // ← ekle
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
                     });
 
                     // Alt bilgileri güncelle

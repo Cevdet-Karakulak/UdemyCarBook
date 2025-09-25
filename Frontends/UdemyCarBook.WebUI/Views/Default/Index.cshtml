@@ -11,7 +11,6 @@
 </style>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 @await Component.InvokeAsync("_HeadUILayoutComponentPartial")
@@ -22,7 +21,7 @@
 
     @await Component.InvokeAsync("_DefaultCoverUILayoutComponentPartial")
 
-   @*  <section class="ftco-section ftco-no-pt bg-light">
+    <section class="ftco-section ftco-no-pt bg-light">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-12	featured-top">
@@ -47,11 +46,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Alış Saati</label>
-                                    <input type="text" class="form-control" name="time_pick" id="time_pick" placeholder="Saat Seçiniz">
+                                    <input type="text" class="form-control" name="time_pick" id="time_pick" placeholder="Saat Seçiniz" value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">İade Saat</label>
-                                    <input type="text" class="form-control" name="time_off" id="time_pick" placeholder="Saat Seçiniz">
+                                    <input type="text" class="form-control" name="time_off" id="time_off" placeholder="Saat Seçiniz" value="">
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-secondary py-3 px-4">Uygun Araçları Listele</button>
@@ -93,7 +92,7 @@
                     </div>
                 </div>
             </div>
-    </section> *@
+    </section>
 
     @await Component.InvokeAsync("_DefaultLast5CarsWithBrandsComponentPartial")
 
@@ -114,4 +113,5 @@
     @await Component.InvokeAsync("_ScriptUILayoutComponentPartial")
 
 </body>
+
 </html>

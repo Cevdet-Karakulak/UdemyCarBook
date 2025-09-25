@@ -8,53 +8,79 @@
             <h4 class="card-title d-inline-block mb-3">Araç Marka Sayılar</h4>
 
             <!-- Grafik container -->
-            <div style="height:260px; width:100%; display:flex; justify-content:center; align-items:center;">
-                <canvas id="my2Chart" height="220px" style="max-width:220px;"></canvas>
+            <div style="height:280px; width:100%; display:flex; justify-content:center; align-items:center;">
+                <canvas id="my2Chart" style="max-width:260px; height:260px;"></canvas>
             </div>
 
             <script>
-                document.addEventListener("DOMContentLoaded", function() {
+                document.addEventListener("DOMContentLoaded", function () {
                     var labels = @Html.Raw(JsonConvert.SerializeObject(Model.Item1.Select(x => x.Name)));
                     var dataCounts = @Html.Raw(JsonConvert.SerializeObject(Model.Item1.Select(x => x.CarCount)));
+                    var totalCars = @Model.Item2;
 
                     var ctx = document.getElementById('my2Chart').getContext('2d');
                     new Chart(ctx, {
-                        type: 'pie',
+                        type: 'doughnut',
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'En Çok 7 Marka',
+                                label: ' Marka Arac Sayisi',
                                 data: dataCounts,
-                                backgroundColor:[
-                                    'rgba(255,99,132,0.7)',
-                                    'rgba(54,162,235,0.7)',
-                                    'rgba(255,206,86,0.7)',
-                                    'rgba(75,192,192,0.7)',
-                                    'rgba(153,102,255,0.7)',
-                                    'rgba(255,159,64,0.7)',
-                                    'rgba(185,114,21,0.7)'
+                                backgroundColor: [
+                                    'rgba(255,99,132,0.8)',
+                                    'rgba(54,162,235,0.8)',
+                                    'rgba(255,206,86,0.8)',
+                                    'rgba(75,192,192,0.8)',
+                                    'rgba(153,102,255,0.8)',
+                                    'rgba(255,159,64,0.8)',
+                                    'rgba(185,114,21,0.8)'
                                 ],
-                                borderColor:[
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54,162,235,1)',
-                                    'rgba(255,206,86,1)',
-                                    'rgba(75,192,192,1)',
-                                    'rgba(153,102,255,1)',
-                                    'rgba(255,159,64,1)',
-                                    'rgba(185,114,21,1)'
-                                ],
-                                borderWidth: 1
+                                borderColor: '#fff',
+                                borderWidth: 2,
+                                hoverOffset: 15
                             }]
                         },
                         options: {
                             responsive: true,
+                            cutout: '60%',
                             plugins: {
                                 legend: {
-                                    position: 'bottom',
-                                    align: 'center'
+                                    position: 'top',
+                                    align: 'center',
+                                    labels: {
+                                        boxWidth: 18,
+                                        padding: 12,
+                                        usePointStyle: true
+                                    }
+                                },
+                                tooltip: {
+                                    backgroundColor: '#333',
+                                    titleColor: '#fff',
+                                    bodyColor: '#fff',
+                                    padding: 10,
+                                    borderColor: '#ddd',
+                                    borderWidth: 1
                                 }
                             }
-                        }
+                        },
+                                       plugins: [{
+                    id: 'centerText',
+                    afterDraw(chart) {
+                        const { ctx, chartArea } = chart;
+                        if (!chartArea) return;
+
+                        const centerX = (chartArea.left + chartArea.right) / 2;
+                        const centerY = (chartArea.top + chartArea.bottom) / 2;
+
+                        ctx.save();
+                        ctx.font = 'bold 16px sans-serif';
+                        ctx.fillStyle = '#333';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(totalCars + ' Araç', centerX, centerY);
+                        ctx.restore();
+                    }
+                }]
                     });
                 });
             </script>
