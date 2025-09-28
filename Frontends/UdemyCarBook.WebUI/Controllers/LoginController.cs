@@ -63,5 +63,11 @@ namespace UdemyCarBook.WebUI.Controllers
            
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(JwtBearerDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
