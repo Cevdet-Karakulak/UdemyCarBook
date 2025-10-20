@@ -27,7 +27,7 @@ namespace UdemyCarBook.Application.Features.Mediator.Handlers.CommentHandlers
 
             using (var client = new HttpClient())
             {
-                var apiKey = "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";
+                var apiKey = "YOUR_API_KEY;
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
                 var toxicRequestBody = new { inputs = request.Description };
