@@ -95,7 +95,33 @@ Her kullanıcı rolüne (admin, kullanıcı vb.) göre farklı erişim yetkileri
 
 ## 📸 **Ekran Görüntüleri**
 
-> 🚧 Görseller eklenecek (Admin Paneli, API Swagger, Araç Listeleme, Kiralama Formu, SignalR Bildirim)
+<img width="1897" height="901" alt="Image" src="https://github.com/user-attachments/assets/7c7af035-5335-4b55-9253-f2379771729c" />
+<img width="1900" height="907" alt="Image" src="https://github.com/user-attachments/assets/864d5cd9-f3f0-434a-921a-3edab25cae72" />
+<img width="1781" height="918" alt="Image" src="https://github.com/user-attachments/assets/9888980c-6071-49dc-a9be-e5b6c26dbed3" />
+<img width="1895" height="901" alt="Image" src="https://github.com/user-attachments/assets/77ec3f15-ab31-4d1b-ac35-574a5627eca7" />
+<img width="1895" height="913" alt="Image" src="https://github.com/user-attachments/assets/72e442e3-464b-45ab-90e2-b429f94cf9a3" />
+<img width="1856" height="901" alt="Image" src="https://github.com/user-attachments/assets/fce897ff-4b78-4fca-8217-91f1d738cd5b" />
+<img width="1883" height="903" alt="Image" src="https://github.com/user-attachments/assets/ced006e3-f41b-4463-984f-5989d34befdb" />
+<img width="1571" height="904" alt="Image" src="https://github.com/user-attachments/assets/14f94d43-a746-4f9c-a86d-7e482d3a88b9" />
+<img width="1700" height="902" alt="Image" src="https://github.com/user-attachments/assets/0fcbd2ce-536a-434b-84e4-49afde2c2cf2" />
+<img width="1535" height="899" alt="Image" src="https://github.com/user-attachments/assets/cd488668-9011-436b-967e-1c95f14b36a4" />
+<img width="1647" height="909" alt="Image" src="https://github.com/user-attachments/assets/47f84b0f-1cc1-402f-a2b6-a06b1f5aac6b" />
+<img width="1546" height="897" alt="Image" src="https://github.com/user-attachments/assets/a0a16709-e259-4b96-a428-669029e7ebf6" />
+<img width="1638" height="943" alt="Image" src="https://github.com/user-attachments/assets/09ceb86e-febd-4078-adcd-59bf605d7ee2" />
+<img width="1672" height="899" alt="Image" src="https://github.com/user-attachments/assets/430c188e-ec91-4af3-8b7c-c1a54f54ca6c" />
+<img width="1555" height="906" alt="Image" src="https://github.com/user-attachments/assets/df391dd5-bcfb-40b7-af7a-045ad970f839" />
+<img width="1687" height="904" alt="Image" src="https://github.com/user-attachments/assets/9ab25efd-5efc-43a2-ae99-026c08b19383" />
+<img width="1896" height="946" alt="Image" src="https://github.com/user-attachments/assets/cef81193-bc81-4c28-af60-90742a397aa3" />
+<img width="1892" height="942" alt="Image" src="https://github.com/user-attachments/assets/36af9a35-0c21-4c0e-b1c3-336c978c4d54" />
+<img width="1909" height="935" alt="Image" src="https://github.com/user-attachments/assets/a394f992-6d76-4613-8988-e7689ee63566" />
+<img width="1892" height="908" alt="Image" src="https://github.com/user-attachments/assets/6f19aa83-dec5-40e2-9129-4fd6c28f5057" />
+<img width="1900" height="904" alt="Image" src="https://github.com/user-attachments/assets/9fc3d633-87d0-4f24-a6f3-8402f7f0fa01" />
+<img width="1900" height="900" alt="Image" src="https://github.com/user-attachments/assets/71d20115-1199-4979-9b4b-d3c72e7dbabb" />
+<img width="1903" height="913" alt="Image" src="https://github.com/user-attachments/assets/18d7bee6-c6c7-4b3e-be21-45dede7f22ca" />
+<img width="1739" height="937" alt="Image" src="https://github.com/user-attachments/assets/6de703a3-f89b-4c15-b213-923442e32b07" />
+<img width="1827" height="903" alt="Image" src="https://github.com/user-attachments/assets/5855342a-fdfc-45c1-ac13-e92cb3c299b2" />
+<img width="1576" height="910" alt="Image" src="https://github.com/user-attachments/assets/6ddf57eb-4920-4712-a50f-a055f63a5a98" />
+<img width="1732" height="907" alt="Image" src="https://github.com/user-attachments/assets/07bd487c-fac7-45e0-8863-1e6741cc71f9" />
 
 ---
 
@@ -125,4 +151,3 @@ Veritabanı bağlantı dizesini (`appsettings.json`) kendi ortamınıza göre d�
 
 - **Cevdet Karakulak**  
 - 🌐 [LinkedIn Profilim](https://www.linkedin.com/in/cevdet/)  
-- 🌟 Yazılım geliştirme, ASP.NET Core ve mimari yapılarda uzmanlık  
