@@ -35,7 +35,6 @@ namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
             var responseMessage = await client.DeleteAsync("https://localhost:7124/api/Comments?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
-                // Silme işlemi başarılıysa aynı blogun yorum listesine yönlendir
                 return RedirectToAction("Index", new { id = blogId });
             }
             return View();

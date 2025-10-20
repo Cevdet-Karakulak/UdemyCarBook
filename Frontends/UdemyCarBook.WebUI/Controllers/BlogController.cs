@@ -26,7 +26,6 @@ namespace UdemyCarBook.WebUI.Controllers
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultAllBlogsWithAuthorDto>>(jsonData);
 
-                // Blog başına comment sayısı ekleme
                 foreach (var blog in values)
                 {
                     var commentResponse = await client.GetAsync($"https://localhost:7124/api/Comments/CommentCountByBlog?id=" + blog.blogID);
@@ -76,3 +75,6 @@ namespace UdemyCarBook.WebUI.Controllers
         }
     }
 }
+
+
+//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

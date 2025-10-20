@@ -1,0 +1,44 @@
+﻿<form id="commentForm" class="p-5 bg-light">
+    <input type="hidden" name="BlogID" value="@ViewBag.blogid" />
+    <input type="text" name="Name" id="name" placeholder="Adınız Soyadınız *" required />
+    <input type="email" name="Email" id="email" placeholder="Email Adresi *" required />
+    <textarea name="Description" id="message" placeholder="Yorumunuz" required></textarea>
+    <button type="submit">Yorum Yap</button>
+</form>
+
+<script>
+    document.getElementById("commentForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const formData = {
+            Name: document.getElementById("name").value,
+            Email: document.getElementById("email").value,
+            Description: document.getElementById("message").value,
+            BlogID: @ViewBag.blogid,
+            CreatedDate: new Date().toISOString(),
+            CommentStatus: "Onay Bekliyor"
+        };
+
+        // 1️⃣ Toksisite kontrolü
+        let response = await fetch('/BlogToxcity/CheckToxicity', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        let result = await response.json();
+        if (result.isToxic) { alert("Bu yorum toksik bulundu."); return; }
+
+        // 2️⃣ Yorum ekleme
+        response = await fetch('/BlogToxcity/AddComment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        let addResult = await response.json();
+        alert(addResult.status);
+        if (addResult.status === "Yorum başarıyla eklendi") {
+            document.getElementById("commentForm").reset();
+            location.reload();
+        }
+    });
+</script>
