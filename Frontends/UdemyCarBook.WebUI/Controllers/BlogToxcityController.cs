@@ -59,7 +59,7 @@ namespace UdemyCarBook.WebUI.Controllers
 
             using (var client = new HttpClient())
             {
-                var apiKey = "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";
+                var apiKey = "YOUR_API_KEY";
                 client.DefaultRequestHeaders.Authorization =
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
 
